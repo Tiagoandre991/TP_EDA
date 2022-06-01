@@ -10,7 +10,7 @@ Lista* inserirMaquina(Lista* listaJ, int job, int op, int maq, int temp) {
     if (novo != NULL) {
 
         novo->job = job;
-        novo->operacao = op;   // inserir a nova maquina
+        novo->operacao = op;   
         novo->maquina = maq;
         novo->tempo = temp;
 
@@ -160,7 +160,7 @@ Lista* lerFicheiro(Lista* listaJ) {
 
     FILE* ficheiro;
 
-    ficheiro = fopen("Job.txt", "r"); // pomos o nome do ficheiro que queremos ler
+    ficheiro = fopen("J.txt", "r"); /
 
     if (ficheiro != NULL) {
 
@@ -169,7 +169,7 @@ Lista* lerFicheiro(Lista* listaJ) {
             sscanf(conteudo, "%s%d\n", &texto, &job);
 
             fgets(conteudo, 200, ficheiro);
-            sscanf(conteudo, "%s%d\n", &texto, &operacao); // separar o conteudo do texto para o programa nao se confundir com as variaveis
+            sscanf(conteudo, "%s%d\n", &texto, &operacao); 
 
             fgets(conteudo, 200, ficheiro);
             sscanf(conteudo, "%s%d\n", &texto, &maquina);
@@ -177,7 +177,7 @@ Lista* lerFicheiro(Lista* listaJ) {
             fgets(conteudo, 200, ficheiro);
             sscanf(conteudo, "%s%d\n", &texto, &tempo);
 
-            listaJ = inserirMaquina(listaJ, job, operacao, maquina, tempo); // para garantir que fica ordenada na lista ligada
+            listaJ = inserirMaquina(listaJ, job, operacao, maquina, tempo); 
 
             i++;
         }
@@ -192,7 +192,7 @@ void escreverFicheiro(Lista* listaJ) {
 
     FILE* ficheiro; //descritor do ficheiro
 
-    ficheiro = fopen("Job.txt", "w"); //abrir ficheiro para escrita
+    ficheiro = fopen("J.txt", "w"); 
 
     while (listaJ != NULL) {
 
@@ -205,7 +205,7 @@ void escreverFicheiro(Lista* listaJ) {
         fprintf(ficheiro, "Tempo: ");
         fprintf(ficheiro, "%d\n", listaJ->tempo);
 
-        listaJ = listaJ->seguinte; //passar para a posicao seguinte da lista
+        listaJ = listaJ->seguinte; 
     }
 
     fclose(ficheiro);
@@ -220,7 +220,7 @@ void listarJob(Lista* listaJ) {
         printf(" Maquina: %d\n", listaJ->maquina);
         printf("   Tempo: %d\n", listaJ->tempo);
         printf("\n");
-        listaJ = listaJ->seguinte; // para avancar na lista ligada
+        listaJ = listaJ->seguinte; 
     }
 
 }
@@ -242,7 +242,7 @@ int verificarOperacao(Lista* listaJ, int job, int op) {
 
     while (listaJ != NULL) {
 
-        if (job == listaJ->job && op == listaJ->operacao) //repetido
+        if (job == listaJ->job && op == listaJ->operacao) 
 
             return (1); // encontrou
 
@@ -256,14 +256,14 @@ int verificarMaquina(Lista* listaJ, int job, int op, int maq) {
 
     while (listaJ != NULL) {
 
-        if (job == listaJ->job && op == listaJ->operacao && maq == listaJ->maquina) //repetido
+        if (job == listaJ->job && op == listaJ->operacao && maq == listaJ->maquina) 
 
             return (1); // encontrou
 
         listaJ = listaJ->seguinte;
     }
 
-    return(0);  // nao encontrou a maquina
+    return(0);  
 }
 
 int verMaior(Lista* listaJ) {
@@ -274,20 +274,20 @@ int verMaior(Lista* listaJ) {
 
         if (op == listaJ->operacao) {
             if (maior < listaJ->tempo)
-                maior = listaJ->tempo; //atualiza tempo
+                maior = listaJ->tempo; 
         }
 
-        else { //operacao diferente, logo atualiza somatorio e "zera" o maior
+        else { 
             soma = soma + maior;
             maior = 0;
 
             op = listaJ->operacao;
-            maior = listaJ->tempo; //atualiza tempo
+            maior = listaJ->tempo; 
         }
 
         listaJ = listaJ->seguinte;
     }
-    soma = soma + maior;//atualizar soma da ultima operacao
+    soma = soma + maior;
 
     return (soma);
 }
@@ -301,15 +301,15 @@ int verMenor(Lista* listaJ) {
         if (op == listaJ->operacao) {
             menor = 1000;
             if (menor > listaJ->tempo)
-                menor = listaJ->tempo; //atualiza tempo
+                menor = listaJ->tempo; 
         }
 
-        else { //operacao diferente, logo atualiza somatorio e "zera" o menor
+        else { 
             soma = soma + menor;
             menor = 0;
 
             op = listaJ->operacao;
-            menor = listaJ->tempo; //atualiza tempo
+            menor = listaJ->tempo;
         }
 
         listaJ = listaJ->seguinte;
@@ -327,10 +327,10 @@ int verMedia(Lista* listaJ) {
 
         if (op == listaJ->operacao) {
 
-            somaOp = somaOp + listaJ->tempo; //atualiza tempo
+            somaOp = somaOp + listaJ->tempo; 
         }
 
-        else { //operacao diferente logo soma e atualiza o contador
+        else { 
 
             op = listaJ->operacao;
             somaOp = somaOp + listaJ->tempo;
@@ -340,7 +340,7 @@ int verMedia(Lista* listaJ) {
         listaJ = listaJ->seguinte;
     }
 
-    media = somaOp / cont;//atualizar soma da ultima
+    media = somaOp / cont;
     printf("A media de tempo e: %.1f\n", media);
 
     return (0);
